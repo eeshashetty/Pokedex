@@ -12,14 +12,14 @@ y = []
 # Resize all the pictures to 200x200 and convert it into grayscale
 def changeimg(img):
     img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-    img1 = imutils.resize(img,height = 300)
+    img1 = imutils.resize(img,height = 200)
     w = img1.shape[1]
-    if w<300:
-        img2 = imutils.resize(img,width = 300)
+    if w<200:
+        img2 = imutils.resize(img,width = 200)
         h = img2.shape[0]
-        return img2[int((h-300)/2):int((h+300)/2), 0:300]
+        return img2[int((h-200)/2):int((h+200)/2), 0:200]
     else:
-        return img1[0:300, int((w-300)/2):int((w+300)/2)]
+        return img1[0:200, int((w-200)/2):int((w+200)/2)]
 
 for i in os.listdir("pokemon"):
     for j in os.listdir("pokemon/"+i):
@@ -45,7 +45,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 
 # Applying Principal Component Analysis
 from sklearn.decomposition import PCA
-pca = PCA(n_components = 25, whiten=True).fit(X_train)
+pca = PCA(n_components = 18, whiten=True).fit(X_train)
 X_train = pca.transform(X_train)
 X_test = pca.transform(X_test)
 
